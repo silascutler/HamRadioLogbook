@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+        <body>
+                <div class="navbar navbar-inverse navbar-fixed-top">
+                        <div class="navbar-inner">
+                                <div class="container">
+                                <a class="brand" href="{{ url_for('main') }}">Ham Radio Call Log</a>
+                                <div class="nav-collapse collapse">
+                                        <ul class="nav">
+                                                <li class="active"><a href="{{ url_for('main') }}">Home</a></li>
+                                        </ul>
+                                </div>
+                        </div>
+                </div>
+
+                <div class="container">
+                        <div class="jumbotron">
+                        	<table class="table table-striped">
+                                                <div class="{{type}}" {{alert_vis}}>
+                                                        <strong>{{alert_bnr}}</strong> {{alert_msg}}
+                                                </div>
+				<form action="/add">
+	                	        <input type="text" name=r_stat style="width:18%"  placeholder="Station"> 
+                        	        <input type="text" name=r_band style="width:18%"  placeholder="Band"> 
+                        	        <input type="text" name=r_mode style="width:18%"  placeholder="Mode"> 
+                        	        <input type="text" name=r_cnty style="width:18%"  placeholder="Country"> 
+                        	        <input type="text" name=r_freq style="width:18%"  placeholder="Frequency"><br /> 
+                        	        <input type="text" name=r_note style="width:96%" placeholder="Notes"> <br />
+                                        <button  type="submit">Submit</button>
+
+				</form>
+                        	</table>
+                        <p class="lead">Recently Contacts</p>
+                        <table class="table table-striped" width="647">
+                                <thead>
+                                        <tr>   
+                                                <th>Timestamp</th>
+                                                <th>Station</th>
+						<th>Band</th>
+						<th>Mode</th>
+						<th>Country</th>
+						<th>Frequency</th>
+						<th>Note</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                {% for row in db_results %}
+                                        <tr>   
+                                                <td>{{row[0]}}</td>
+						<td>{{row[1]}}</td>
+						<td>{{row[2]}}</td>
+						<td>{{row[3]}}</td>
+						<td>{{row[4]}}</td>
+						<td>{{row[5]}}</td>
+						<td>{{row[6]}}</td>
+						<td>{{row[7]}}</td>
+                                        </tr>
+                                {% endfor %}
+
+				</tbody>
+			</table>
+
+                        </div>
+                </div>
+
+{% endblock %}
